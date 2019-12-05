@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.examonlineweb.dao.ScoreMapper" >
+  <resultMap id="BaseResultMap" type="com.example.examonlineweb.entity.Score" >
+    <id column="sysid" property="sysid" jdbcType="VARCHAR" />
+    <result column="studentId" property="studentid" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="submitTime" property="submittime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sysid, studentId, score, submitTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from score
+    where sysid = #{sysid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from score
+    where sysid = #{sysid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.examonlineweb.entity.Score" >
+    insert into score (sysid, studentId, score, 
+      submitTime)
+    values (#{sysid,jdbcType=VARCHAR}, #{studentid,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, 
+      #{submittime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.examonlineweb.entity.Score" >
+    insert into score
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sysid != null" >
+        sysid,
+      </if>
+      <if test="studentid != null" >
+        studentId,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="submittime != null" >
+        submitTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sysid != null" >
+        #{sysid,jdbcType=VARCHAR},
+      </if>
+      <if test="studentid != null" >
+        #{studentid,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="submittime != null" >
+        #{submittime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.examonlineweb.entity.Score" >
+    update score
+    <set >
+      <if test="studentid != null" >
+        studentId = #{studentid,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="submittime != null" >
+        submitTime = #{submittime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sysid = #{sysid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.examonlineweb.entity.Score" >
+    update score
+    set studentId = #{studentid,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      submitTime = #{submittime,jdbcType=VARCHAR}
+    where sysid = #{sysid,jdbcType=VARCHAR}
+  </update>
+</mapper>
