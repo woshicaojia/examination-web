@@ -1,103 +1,103 @@
 package com.example.examonlineweb.entity;
 
 public class Subject {
-    private String sysid;
+    private String sysId;
 
-    private String stno;
+    private Integer stNum;
 
-    private String sttitle;
+    private String stTitle;
 
-    private String stoptiona;
+    private String stOptionA;
 
-    private String stoptionb;
+    private String stOptionB;
 
-    private String stoptionc;
+    private String stOptionC;
 
-    private String stoptiond;
+    private String stOptionD;
 
-    private String stanswer;
+    private String stAnswer;
 
-    private String stparse;
+    private String stParse;
 
-    private String ststatus;
+    private String stStatus;
 
-    public String getSysid() {
-        return sysid;
+    public String getSysId() {
+        return sysId;
     }
 
-    public void setSysid(String sysid) {
-        this.sysid = sysid == null ? null : sysid.trim();
+    public void setSysId(String sysId) {
+        this.sysId = sysId == null ? null : sysId.trim();
     }
 
-    public String getStno() {
-        return stno;
+    public Integer getStNum() {
+        return stNum;
     }
 
-    public void setStno(String stno) {
-        this.stno = stno == null ? null : stno.trim();
+    public void setStNum(Integer stNum) {
+        this.stNum = stNum;
     }
 
-    public String getSttitle() {
-        return sttitle;
+    public String getStTitle() {
+        return stTitle;
     }
 
-    public void setSttitle(String sttitle) {
-        this.sttitle = sttitle == null ? null : sttitle.trim();
+    public void setStTitle(String stTitle) {
+        this.stTitle = stTitle == null ? null : stTitle.trim();
     }
 
-    public String getStoptiona() {
-        return stoptiona;
+    public String getStOptionA() {
+        return stOptionA;
     }
 
-    public void setStoptiona(String stoptiona) {
-        this.stoptiona = stoptiona == null ? null : stoptiona.trim();
+    public void setStOptionA(String stOptionA) {
+        this.stOptionA = stOptionA == null ? null : stOptionA.trim();
     }
 
-    public String getStoptionb() {
-        return stoptionb;
+    public String getStOptionB() {
+        return stOptionB;
     }
 
-    public void setStoptionb(String stoptionb) {
-        this.stoptionb = stoptionb == null ? null : stoptionb.trim();
+    public void setStOptionB(String stOptionB) {
+        this.stOptionB = stOptionB == null ? null : stOptionB.trim();
     }
 
-    public String getStoptionc() {
-        return stoptionc;
+    public String getStOptionC() {
+        return stOptionC;
     }
 
-    public void setStoptionc(String stoptionc) {
-        this.stoptionc = stoptionc == null ? null : stoptionc.trim();
+    public void setStOptionC(String stOptionC) {
+        this.stOptionC = stOptionC == null ? null : stOptionC.trim();
     }
 
-    public String getStoptiond() {
-        return stoptiond;
+    public String getStOptionD() {
+        return stOptionD;
     }
 
-    public void setStoptiond(String stoptiond) {
-        this.stoptiond = stoptiond == null ? null : stoptiond.trim();
+    public void setStOptionD(String stOptionD) {
+        this.stOptionD = stOptionD == null ? null : stOptionD.trim();
     }
 
-    public String getStanswer() {
-        return stanswer;
+    public String getStAnswer() {
+        return stAnswer;
     }
 
-    public void setStanswer(String stanswer) {
-        this.stanswer = stanswer == null ? null : stanswer.trim();
+    public void setStAnswer(String stAnswer) {
+        this.stAnswer = stAnswer == null ? null : stAnswer.trim();
     }
 
-    public String getStparse() {
-        return stparse;
+    public String getStParse() {
+        return stParse;
     }
 
-    public void setStparse(String stparse) {
-        this.stparse = stparse == null ? null : stparse.trim();
+    public void setStParse(String stParse) {
+        this.stParse = stParse == null ? null : stParse.trim();
     }
 
-    public String getStstatus() {
-        return ststatus;
+    public String getStStatus() {
+        return stStatus;
     }
 
-    public void setStstatus(String ststatus) {
-        this.ststatus = ststatus == null ? null : ststatus.trim();
+    public void setStStatus(String stStatus) {
+        this.stStatus = stStatus == null ? null : stStatus.trim();
     }
 }

@@ -1,93 +1,93 @@
 package com.example.examonlineweb.entity;
 
 public class Student {
-    private String sysid;
+    private String sysId;
 
-    private String studentid;
+    private String studentId;
 
-    private String studentname;
+    private String studentName;
 
-    private String password;
+    private String studentSex;
 
-    private Integer result;
+    private String sClass;
 
-    private String sclass;
+    private String sPicture;
 
-    private String teacherid;
+    private String teacherId;
 
-    private String stustatus;
+    private String createTime;
 
-    private String stupic;
+    private String sStatus;
 
-    public String getSysid() {
-        return sysid;
+    public String getSysId() {
+        return sysId;
     }
 
-    public void setSysid(String sysid) {
-        this.sysid = sysid == null ? null : sysid.trim();
+    public void setSysId(String sysId) {
+        this.sysId = sysId == null ? null : sysId.trim();
     }
 
-    public String getStudentid() {
-        return studentid;
+    public String getStudentId() {
+        return studentId;
     }
 
-    public void setStudentid(String studentid) {
-        this.studentid = studentid == null ? null : studentid.trim();
+    public void setStudentId(String studentId) {
+        this.studentId = studentId == null ? null : studentId.trim();
     }
 
-    public String getStudentname() {
-        return studentname;
+    public String getStudentName() {
+        return studentName;
     }
 
-    public void setStudentname(String studentname) {
-        this.studentname = studentname == null ? null : studentname.trim();
+    public void setStudentName(String studentName) {
+        this.studentName = studentName == null ? null : studentName.trim();
     }
 
-    public String getPassword() {
-        return password;
+    public String getStudentSex() {
+        return studentSex;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setStudentSex(String studentSex) {
+        this.studentSex = studentSex == null ? null : studentSex.trim();
     }
 
-    public Integer getResult() {
-        return result;
+    public String getsClass() {
+        return sClass;
     }
 
-    public void setResult(Integer result) {
-        this.result = result;
+    public void setsClass(String sClass) {
+        this.sClass = sClass == null ? null : sClass.trim();
     }
 
-    public String getSclass() {
-        return sclass;
+    public String getsPicture() {
+        return sPicture;
     }
 
-    public void setSclass(String sclass) {
-        this.sclass = sclass == null ? null : sclass.trim();
+    public void setsPicture(String sPicture) {
+        this.sPicture = sPicture == null ? null : sPicture.trim();
     }
 
-    public String getTeacherid() {
-        return teacherid;
+    public String getTeacherId() {
+        return teacherId;
     }
 
-    public void setTeacherid(String teacherid) {
-        this.teacherid = teacherid == null ? null : teacherid.trim();
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId == null ? null : teacherId.trim();
     }
 
-    public String getStustatus() {
-        return stustatus;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setStustatus(String stustatus) {
-        this.stustatus = stustatus == null ? null : stustatus.trim();
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime == null ? null : createTime.trim();
     }
 
-    public String getStupic() {
-        return stupic;
+    public String getsStatus() {
+        return sStatus;
     }
 
-    public void setStupic(String stupic) {
-        this.stupic = stupic == null ? null : stupic.trim();
+    public void setsStatus(String sStatus) {
+        this.sStatus = sStatus == null ? null : sStatus.trim();
     }
 }

@@ -1,53 +1,63 @@
 package com.example.examonlineweb.entity;
 
 public class Teacher {
-    private String sysid;
+    private String sysId;
 
-    private String teacherid;
+    private String teacherId;
 
-    private String password;
+    private String teacherName;
 
-    private String teachername;
+    private String teacherSex;
 
-    private String teacherpic;
+    private String teacherPic;
 
-    public String getSysid() {
-        return sysid;
+    private String studentId;
+
+    public String getSysId() {
+        return sysId;
     }
 
-    public void setSysid(String sysid) {
-        this.sysid = sysid == null ? null : sysid.trim();
+    public void setSysId(String sysId) {
+        this.sysId = sysId == null ? null : sysId.trim();
     }
 
-    public String getTeacherid() {
-        return teacherid;
+    public String getTeacherId() {
+        return teacherId;
     }
 
-    public void setTeacherid(String teacherid) {
-        this.teacherid = teacherid == null ? null : teacherid.trim();
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId == null ? null : teacherId.trim();
     }
 
-    public String getPassword() {
-        return password;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName == null ? null : teacherName.trim();
     }
 
-    public String getTeachername() {
-        return teachername;
+    public String getTeacherSex() {
+        return teacherSex;
     }
 
-    public void setTeachername(String teachername) {
-        this.teachername = teachername == null ? null : teachername.trim();
+    public void setTeacherSex(String teacherSex) {
+        this.teacherSex = teacherSex == null ? null : teacherSex.trim();
     }
 
-    public String getTeacherpic() {
-        return teacherpic;
+    public String getTeacherPic() {
+        return teacherPic;
     }
 
-    public void setTeacherpic(String teacherpic) {
-        this.teacherpic = teacherpic == null ? null : teacherpic.trim();
+    public void setTeacherPic(String teacherPic) {
+        this.teacherPic = teacherPic == null ? null : teacherPic.trim();
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId == null ? null : studentId.trim();
     }
 }

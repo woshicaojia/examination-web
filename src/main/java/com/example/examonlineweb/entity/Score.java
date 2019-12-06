@@ -1,43 +1,33 @@
 package com.example.examonlineweb.entity;
 
 public class Score {
-    private String sysid;
+    private String sysId;
 
-    private String studentid;
+    private String studentId;
 
-    private Integer score;
+    private Integer result;
 
-    private String submittime;
-
-    public String getSysid() {
-        return sysid;
+    public String getSysId() {
+        return sysId;
     }
 
-    public void setSysid(String sysid) {
-        this.sysid = sysid == null ? null : sysid.trim();
+    public void setSysId(String sysId) {
+        this.sysId = sysId == null ? null : sysId.trim();
     }
 
-    public String getStudentid() {
-        return studentid;
+    public String getStudentId() {
+        return studentId;
     }
 
-    public void setStudentid(String studentid) {
-        this.studentid = studentid == null ? null : studentid.trim();
+    public void setStudentId(String studentId) {
+        this.studentId = studentId == null ? null : studentId.trim();
     }
 
-    public Integer getScore() {
-        return score;
+    public Integer getResult() {
+        return result;
     }
 
-    public void setScore(Integer score) {
-        this.score = score;
-    }
-
-    public String getSubmittime() {
-        return submittime;
-    }
-
-    public void setSubmittime(String submittime) {
-        this.submittime = submittime == null ? null : submittime.trim();
+    public void setResult(Integer result) {
+        this.result = result;
     }
 }
