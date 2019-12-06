@@ -2,92 +2,105 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.examonlineweb.dao.TeacherMapper" >
   <resultMap id="BaseResultMap" type="com.example.examonlineweb.entity.Teacher" >
-    <id column="sysid" property="sysid" jdbcType="VARCHAR" />
-    <result column="teacherId" property="teacherid" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="teacherName" property="teachername" jdbcType="VARCHAR" />
-    <result column="teacherPic" property="teacherpic" jdbcType="VARCHAR" />
+    <id column="sys_id" property="sysId" jdbcType="VARCHAR" />
+    <result column="teacher_id" property="teacherId" jdbcType="VARCHAR" />
+    <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
+    <result column="teacher_sex" property="teacherSex" jdbcType="VARCHAR" />
+    <result column="teacher__pic" property="teacherPic" jdbcType="VARCHAR" />
+    <result column="student_id" property="studentId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    sysid, teacherId, password, teacherName, teacherPic
+    sys_id, teacher_id, teacher_name, teacher_sex, teacher__pic, student_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from teacher
-    where sysid = #{sysid,jdbcType=VARCHAR}
+    where sys_id = #{sysId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from teacher
-    where sysid = #{sysid,jdbcType=VARCHAR}
+    where sys_id = #{sysId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.example.examonlineweb.entity.Teacher" >
-    insert into teacher (sysid, teacherId, password, 
-      teacherName, teacherPic)
-    values (#{sysid,jdbcType=VARCHAR}, #{teacherid,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{teachername,jdbcType=VARCHAR}, #{teacherpic,jdbcType=VARCHAR})
+    insert into teacher (sys_id, teacher_id, teacher_name, 
+      teacher_sex, teacher__pic, student_id
+      )
+    values (#{sysId,jdbcType=VARCHAR}, #{teacherId,jdbcType=VARCHAR}, #{teacherName,jdbcType=VARCHAR}, 
+      #{teacherSex,jdbcType=VARCHAR}, #{teacherPic,jdbcType=VARCHAR}, #{studentId,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.example.examonlineweb.entity.Teacher" >
     insert into teacher
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="sysid != null" >
-        sysid,
+      <if test="sysId != null" >
+        sys_id,
       </if>
-      <if test="teacherid != null" >
-        teacherId,
+      <if test="teacherId != null" >
+        teacher_id,
       </if>
-      <if test="password != null" >
-        password,
+      <if test="teacherName != null" >
+        teacher_name,
       </if>
-      <if test="teachername != null" >
-        teacherName,
+      <if test="teacherSex != null" >
+        teacher_sex,
       </if>
-      <if test="teacherpic != null" >
-        teacherPic,
+      <if test="teacherPic != null" >
+        teacher__pic,
+      </if>
+      <if test="studentId != null" >
+        student_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="sysid != null" >
-        #{sysid,jdbcType=VARCHAR},
+      <if test="sysId != null" >
+        #{sysId,jdbcType=VARCHAR},
       </if>
-      <if test="teacherid != null" >
-        #{teacherid,jdbcType=VARCHAR},
+      <if test="teacherId != null" >
+        #{teacherId,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
+      <if test="teacherName != null" >
+        #{teacherName,jdbcType=VARCHAR},
       </if>
-      <if test="teachername != null" >
-        #{teachername,jdbcType=VARCHAR},
+      <if test="teacherSex != null" >
+        #{teacherSex,jdbcType=VARCHAR},
       </if>
-      <if test="teacherpic != null" >
-        #{teacherpic,jdbcType=VARCHAR},
+      <if test="teacherPic != null" >
+        #{teacherPic,jdbcType=VARCHAR},
+      </if>
+      <if test="studentId != null" >
+        #{studentId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.example.examonlineweb.entity.Teacher" >
     update teacher
     <set >
-      <if test="teacherid != null" >
-        teacherId = #{teacherid,jdbcType=VARCHAR},
+      <if test="teacherId != null" >
+        teacher_id = #{teacherId,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
+      <if test="teacherName != null" >
+        teacher_name = #{teacherName,jdbcType=VARCHAR},
       </if>
-      <if test="teachername != null" >
-        teacherName = #{teachername,jdbcType=VARCHAR},
+      <if test="teacherSex != null" >
+        teacher_sex = #{teacherSex,jdbcType=VARCHAR},
       </if>
-      <if test="teacherpic != null" >
-        teacherPic = #{teacherpic,jdbcType=VARCHAR},
+      <if test="teacherPic != null" >
+        teacher__pic = #{teacherPic,jdbcType=VARCHAR},
+      </if>
+      <if test="studentId != null" >
+        student_id = #{studentId,jdbcType=VARCHAR},
       </if>
     </set>
-    where sysid = #{sysid,jdbcType=VARCHAR}
+    where sys_id = #{sysId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.examonlineweb.entity.Teacher" >
     update teacher
-    set teacherId = #{teacherid,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      teacherName = #{teachername,jdbcType=VARCHAR},
-      teacherPic = #{teacherpic,jdbcType=VARCHAR}
-    where sysid = #{sysid,jdbcType=VARCHAR}
+    set teacher_id = #{teacherId,jdbcType=VARCHAR},
+      teacher_name = #{teacherName,jdbcType=VARCHAR},
+      teacher_sex = #{teacherSex,jdbcType=VARCHAR},
+      teacher__pic = #{teacherPic,jdbcType=VARCHAR},
+      student_id = #{studentId,jdbcType=VARCHAR}
+    where sys_id = #{sysId,jdbcType=VARCHAR}
   </update>
 </mapper>

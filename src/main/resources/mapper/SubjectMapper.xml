@@ -2,152 +2,152 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.examonlineweb.dao.SubjectMapper" >
   <resultMap id="BaseResultMap" type="com.example.examonlineweb.entity.Subject" >
-    <id column="sysid" property="sysid" jdbcType="VARCHAR" />
-    <result column="stNo" property="stno" jdbcType="VARCHAR" />
-    <result column="stTitle" property="sttitle" jdbcType="VARCHAR" />
-    <result column="stOptionA" property="stoptiona" jdbcType="VARCHAR" />
-    <result column="stOptionB" property="stoptionb" jdbcType="VARCHAR" />
-    <result column="stOptionC" property="stoptionc" jdbcType="VARCHAR" />
-    <result column="stOptionD" property="stoptiond" jdbcType="VARCHAR" />
-    <result column="stAnswer" property="stanswer" jdbcType="VARCHAR" />
-    <result column="stParse" property="stparse" jdbcType="VARCHAR" />
-    <result column="stStatus" property="ststatus" jdbcType="VARCHAR" />
+    <id column="sys_id" property="sysId" jdbcType="VARCHAR" />
+    <result column="st_num" property="stNum" jdbcType="INTEGER" />
+    <result column="st_title" property="stTitle" jdbcType="VARCHAR" />
+    <result column="st_option_a" property="stOptionA" jdbcType="VARCHAR" />
+    <result column="st_option_b" property="stOptionB" jdbcType="VARCHAR" />
+    <result column="st_option_c" property="stOptionC" jdbcType="VARCHAR" />
+    <result column="st_option_d" property="stOptionD" jdbcType="VARCHAR" />
+    <result column="st_answer" property="stAnswer" jdbcType="VARCHAR" />
+    <result column="st_parse" property="stParse" jdbcType="VARCHAR" />
+    <result column="st_status" property="stStatus" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    sysid, stNo, stTitle, stOptionA, stOptionB, stOptionC, stOptionD, stAnswer, stParse, 
-    stStatus
+    sys_id, st_num, st_title, st_option_a, st_option_b, st_option_c, st_option_d, st_answer, 
+    st_parse, st_status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from subject
-    where sysid = #{sysid,jdbcType=VARCHAR}
+    where sys_id = #{sysId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from subject
-    where sysid = #{sysid,jdbcType=VARCHAR}
+    where sys_id = #{sysId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.example.examonlineweb.entity.Subject" >
-    insert into subject (sysid, stNo, stTitle, 
-      stOptionA, stOptionB, stOptionC, 
-      stOptionD, stAnswer, stParse, 
-      stStatus)
-    values (#{sysid,jdbcType=VARCHAR}, #{stno,jdbcType=VARCHAR}, #{sttitle,jdbcType=VARCHAR}, 
-      #{stoptiona,jdbcType=VARCHAR}, #{stoptionb,jdbcType=VARCHAR}, #{stoptionc,jdbcType=VARCHAR}, 
-      #{stoptiond,jdbcType=VARCHAR}, #{stanswer,jdbcType=VARCHAR}, #{stparse,jdbcType=VARCHAR}, 
-      #{ststatus,jdbcType=VARCHAR})
+    insert into subject (sys_id, st_num, st_title, 
+      st_option_a, st_option_b, st_option_c, 
+      st_option_d, st_answer, st_parse, 
+      st_status)
+    values (#{sysId,jdbcType=VARCHAR}, #{stNum,jdbcType=INTEGER}, #{stTitle,jdbcType=VARCHAR}, 
+      #{stOptionA,jdbcType=VARCHAR}, #{stOptionB,jdbcType=VARCHAR}, #{stOptionC,jdbcType=VARCHAR}, 
+      #{stOptionD,jdbcType=VARCHAR}, #{stAnswer,jdbcType=VARCHAR}, #{stParse,jdbcType=VARCHAR}, 
+      #{stStatus,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.examonlineweb.entity.Subject" >
     insert into subject
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="sysid != null" >
-        sysid,
+      <if test="sysId != null" >
+        sys_id,
       </if>
-      <if test="stno != null" >
-        stNo,
+      <if test="stNum != null" >
+        st_num,
       </if>
-      <if test="sttitle != null" >
-        stTitle,
+      <if test="stTitle != null" >
+        st_title,
       </if>
-      <if test="stoptiona != null" >
-        stOptionA,
+      <if test="stOptionA != null" >
+        st_option_a,
       </if>
-      <if test="stoptionb != null" >
-        stOptionB,
+      <if test="stOptionB != null" >
+        st_option_b,
       </if>
-      <if test="stoptionc != null" >
-        stOptionC,
+      <if test="stOptionC != null" >
+        st_option_c,
       </if>
-      <if test="stoptiond != null" >
-        stOptionD,
+      <if test="stOptionD != null" >
+        st_option_d,
       </if>
-      <if test="stanswer != null" >
-        stAnswer,
+      <if test="stAnswer != null" >
+        st_answer,
       </if>
-      <if test="stparse != null" >
-        stParse,
+      <if test="stParse != null" >
+        st_parse,
       </if>
-      <if test="ststatus != null" >
-        stStatus,
+      <if test="stStatus != null" >
+        st_status,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="sysid != null" >
-        #{sysid,jdbcType=VARCHAR},
+      <if test="sysId != null" >
+        #{sysId,jdbcType=VARCHAR},
       </if>
-      <if test="stno != null" >
-        #{stno,jdbcType=VARCHAR},
+      <if test="stNum != null" >
+        #{stNum,jdbcType=INTEGER},
       </if>
-      <if test="sttitle != null" >
-        #{sttitle,jdbcType=VARCHAR},
+      <if test="stTitle != null" >
+        #{stTitle,jdbcType=VARCHAR},
       </if>
-      <if test="stoptiona != null" >
-        #{stoptiona,jdbcType=VARCHAR},
+      <if test="stOptionA != null" >
+        #{stOptionA,jdbcType=VARCHAR},
       </if>
-      <if test="stoptionb != null" >
-        #{stoptionb,jdbcType=VARCHAR},
+      <if test="stOptionB != null" >
+        #{stOptionB,jdbcType=VARCHAR},
       </if>
-      <if test="stoptionc != null" >
-        #{stoptionc,jdbcType=VARCHAR},
+      <if test="stOptionC != null" >
+        #{stOptionC,jdbcType=VARCHAR},
       </if>
-      <if test="stoptiond != null" >
-        #{stoptiond,jdbcType=VARCHAR},
+      <if test="stOptionD != null" >
+        #{stOptionD,jdbcType=VARCHAR},
       </if>
-      <if test="stanswer != null" >
-        #{stanswer,jdbcType=VARCHAR},
+      <if test="stAnswer != null" >
+        #{stAnswer,jdbcType=VARCHAR},
       </if>
-      <if test="stparse != null" >
-        #{stparse,jdbcType=VARCHAR},
+      <if test="stParse != null" >
+        #{stParse,jdbcType=VARCHAR},
       </if>
-      <if test="ststatus != null" >
-        #{ststatus,jdbcType=VARCHAR},
+      <if test="stStatus != null" >
+        #{stStatus,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.example.examonlineweb.entity.Subject" >
     update subject
     <set >
-      <if test="stno != null" >
-        stNo = #{stno,jdbcType=VARCHAR},
+      <if test="stNum != null" >
+        st_num = #{stNum,jdbcType=INTEGER},
       </if>
-      <if test="sttitle != null" >
-        stTitle = #{sttitle,jdbcType=VARCHAR},
+      <if test="stTitle != null" >
+        st_title = #{stTitle,jdbcType=VARCHAR},
       </if>
-      <if test="stoptiona != null" >
-        stOptionA = #{stoptiona,jdbcType=VARCHAR},
+      <if test="stOptionA != null" >
+        st_option_a = #{stOptionA,jdbcType=VARCHAR},
       </if>
-      <if test="stoptionb != null" >
-        stOptionB = #{stoptionb,jdbcType=VARCHAR},
+      <if test="stOptionB != null" >
+        st_option_b = #{stOptionB,jdbcType=VARCHAR},
       </if>
-      <if test="stoptionc != null" >
-        stOptionC = #{stoptionc,jdbcType=VARCHAR},
+      <if test="stOptionC != null" >
+        st_option_c = #{stOptionC,jdbcType=VARCHAR},
       </if>
-      <if test="stoptiond != null" >
-        stOptionD = #{stoptiond,jdbcType=VARCHAR},
+      <if test="stOptionD != null" >
+        st_option_d = #{stOptionD,jdbcType=VARCHAR},
       </if>
-      <if test="stanswer != null" >
-        stAnswer = #{stanswer,jdbcType=VARCHAR},
+      <if test="stAnswer != null" >
+        st_answer = #{stAnswer,jdbcType=VARCHAR},
       </if>
-      <if test="stparse != null" >
-        stParse = #{stparse,jdbcType=VARCHAR},
+      <if test="stParse != null" >
+        st_parse = #{stParse,jdbcType=VARCHAR},
       </if>
-      <if test="ststatus != null" >
-        stStatus = #{ststatus,jdbcType=VARCHAR},
+      <if test="stStatus != null" >
+        st_status = #{stStatus,jdbcType=VARCHAR},
       </if>
     </set>
-    where sysid = #{sysid,jdbcType=VARCHAR}
+    where sys_id = #{sysId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.examonlineweb.entity.Subject" >
     update subject
-    set stNo = #{stno,jdbcType=VARCHAR},
-      stTitle = #{sttitle,jdbcType=VARCHAR},
-      stOptionA = #{stoptiona,jdbcType=VARCHAR},
-      stOptionB = #{stoptionb,jdbcType=VARCHAR},
-      stOptionC = #{stoptionc,jdbcType=VARCHAR},
-      stOptionD = #{stoptiond,jdbcType=VARCHAR},
-      stAnswer = #{stanswer,jdbcType=VARCHAR},
-      stParse = #{stparse,jdbcType=VARCHAR},
-      stStatus = #{ststatus,jdbcType=VARCHAR}
-    where sysid = #{sysid,jdbcType=VARCHAR}
+    set st_num = #{stNum,jdbcType=INTEGER},
+      st_title = #{stTitle,jdbcType=VARCHAR},
+      st_option_a = #{stOptionA,jdbcType=VARCHAR},
+      st_option_b = #{stOptionB,jdbcType=VARCHAR},
+      st_option_c = #{stOptionC,jdbcType=VARCHAR},
+      st_option_d = #{stOptionD,jdbcType=VARCHAR},
+      st_answer = #{stAnswer,jdbcType=VARCHAR},
+      st_parse = #{stParse,jdbcType=VARCHAR},
+      st_status = #{stStatus,jdbcType=VARCHAR}
+    where sys_id = #{sysId,jdbcType=VARCHAR}
   </update>
 </mapper>
