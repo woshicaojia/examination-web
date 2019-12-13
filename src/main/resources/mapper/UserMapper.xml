@@ -3,13 +3,16 @@
 <mapper namespace="com.example.examonlineweb.dao.UserMapper" >
   <resultMap id="BaseResultMap" type="com.example.examonlineweb.entity.User" >
     <id column="sys_id" property="sysId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="user_pass" property="userPass" jdbcType="VARCHAR" />
     <result column="user_role" property="userRole" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    sys_id, user_name, user_pass, user_role, create_time
+    sys_id, name, sex, age, user_name, user_pass, user_role, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -17,14 +20,22 @@
     from user
     where sys_id = #{sysId,jdbcType=VARCHAR}
   </select>
+  <select id="loadUserByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where user_name = #{userName,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from user
     where sys_id = #{sysId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.example.examonlineweb.entity.User" >
-    insert into user (sys_id, user_name, user_pass, 
+    insert into user (sys_id, name, sex, 
+      age, user_name, user_pass, 
       user_role, create_time)
-    values (#{sysId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userPass,jdbcType=VARCHAR}, 
+    values (#{sysId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPass,jdbcType=VARCHAR}, 
       #{userRole,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.examonlineweb.entity.User" >
@@ -32,6 +43,15 @@
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="sysId != null" >
         sys_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="age != null" >
+        age,
       </if>
       <if test="userName != null" >
         user_name,
@@ -50,6 +70,15 @@
       <if test="sysId != null" >
         #{sysId,jdbcType=VARCHAR},
       </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
       <if test="userName != null" >
         #{userName,jdbcType=VARCHAR},
       </if>
@@ -67,6 +96,15 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.example.examonlineweb.entity.User" >
     update user
     <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
       <if test="userName != null" >
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
@@ -84,7 +122,10 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.examonlineweb.entity.User" >
     update user
-    set user_name = #{userName,jdbcType=VARCHAR},
+    set name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
       user_pass = #{userPass,jdbcType=VARCHAR},
       user_role = #{userRole,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=VARCHAR}
