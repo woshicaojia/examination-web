@@ -1,4 +1,4 @@
-package com.example.examonlineweb.config;
+package com.example.examonlineweb;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,18 +11,18 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- * swagger配置bean
+ * @author caojia
+ * @time 下午 3:43
  */
 @Configuration
 @EnableSwagger2
-public class Swagger2 {
-
+public class Swagger2Config {
     @Bean
     public Docket createRestApi(){
         return new Docket(DocumentationType.SWAGGER_2).
                 apiInfo(apiInfo()).
                 select().
-                apis(RequestHandlerSelectors.basePackage("com.example.springbootweb.controller")).
+                apis(RequestHandlerSelectors.basePackage("com.example.examonlineweb.controller")).
                 paths(PathSelectors.any()).
                 build();
     }
@@ -31,8 +31,7 @@ public class Swagger2 {
         return new ApiInfoBuilder().
                 title("前后端分离项目中使用swagger2构建restful api").
                 description("第一次在springboot项目中集成swagger2").
-                contact("caojia").
+                contact("xxxxxx").
                 version("1.0").build();
-
     }
 }
