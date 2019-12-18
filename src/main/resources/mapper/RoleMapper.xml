@@ -2,23 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.examonlineweb.dao.RoleMapper" >
   <resultMap id="BaseResultMap" type="com.example.examonlineweb.entity.Role" >
-    <result column="sys_id" property="sysId" jdbcType="VARCHAR" />
-    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <id column="role_id" property="roleId" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="role_name" property="roleName" jdbcType="VARCHAR" />
   </resultMap>
+  <sql id="Base_Column_List" >
+    role_id, name, role_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from role
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from role
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </delete>
   <insert id="insert" parameterType="com.example.examonlineweb.entity.Role" >
-    insert into role (sys_id, role_id, name, 
-      role_name)
-    values (#{sysId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{roleName,jdbcType=VARCHAR})
+    insert into role (role_id, name, role_name
+      )
+    values (#{roleId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.example.examonlineweb.entity.Role" >
     insert into role
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="sysId != null" >
-        sys_id,
-      </if>
       <if test="roleId != null" >
         role_id,
       </if>
@@ -30,9 +39,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="sysId != null" >
-        #{sysId,jdbcType=VARCHAR},
-      </if>
       <if test="roleId != null" >
         #{roleId,jdbcType=VARCHAR},
       </if>
@@ -44,4 +50,22 @@
       </if>
     </trim>
   </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.examonlineweb.entity.Role" >
+    update role
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null" >
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.examonlineweb.entity.Role" >
+    update role
+    set name = #{name,jdbcType=VARCHAR},
+      role_name = #{roleName,jdbcType=VARCHAR}
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </update>
 </mapper>

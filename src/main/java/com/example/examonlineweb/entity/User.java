@@ -1,24 +1,12 @@
 package com.example.examonlineweb.entity;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import java.util.HashSet;
+import java.util.Set;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+public class User {
+    private String userId;
 
-public class User implements Serializable, UserDetails {
-
-    private static final long serialVersionUID = 626493326811498620L;
-    private String sysId;
-
-    private String name;
-
-    private String sex;
-
-    private Integer age;
+    private String chinaName;
 
     private String userName;
 
@@ -28,51 +16,38 @@ public class User implements Serializable, UserDetails {
 
     private String createTime;
 
-    private List<Role> roles;
+    private String roleId;
 
-    public String getSysId() {
-        return sysId;
+    //role集合
+    private Set<Role> roles = new HashSet<>();
+
+    public String getUserId() {
+        return userId;
     }
 
-    public void setSysId(String sysId) {
-        this.sysId = sysId == null ? null : sysId.trim();
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
-    public String getName() {
-        return name;
+    public String getChinaName() {
+        return chinaName;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setChinaName(String chinaName) {
+        this.chinaName = chinaName == null ? null : chinaName.trim();
     }
 
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    /*public String getUserName() {
+    public String getUserName() {
         return userName;
-    }*/
+    }
 
     public void setUserName(String userName) {
         this.userName = userName == null ? null : userName.trim();
     }
 
-    /*public String getUserPass() {
+    public String getUserPass() {
         return userPass;
-    }*/
+    }
 
     public void setUserPass(String userPass) {
         this.userPass = userPass == null ? null : userPass.trim();
@@ -94,51 +69,15 @@ public class User implements Serializable, UserDetails {
         this.createTime = createTime == null ? null : createTime.trim();
     }
 
-    public List<Role> getRoles() {
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId == null ? null : roleId.trim();
+    }
+
+    public Set<Role> getRoles() {
         return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        for (Role role : roles) {
-            //添加用户角色，前缀为ROLE_
-            authorities.add(new SimpleGrantedAuthority("ROLE_"+role.getName()));
-        }
-        return authorities;
-    }
-
-    @Override
-    public String getPassword() {
-        return userPass;
-    }
-
-    @Override
-    public String getUsername() {
-        return userName;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
     }
 }

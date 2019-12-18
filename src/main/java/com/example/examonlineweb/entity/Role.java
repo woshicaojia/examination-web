@@ -1,21 +1,17 @@
 package com.example.examonlineweb.entity;
 
-public class Role {
-    private String sysId;
+import java.util.HashSet;
+import java.util.Set;
 
+public class Role {
     private String roleId;
 
     private String name;
 
     private String roleName;
 
-    public String getSysId() {
-        return sysId;
-    }
-
-    public void setSysId(String sysId) {
-        this.sysId = sysId == null ? null : sysId.trim();
-    }
+    //权限集合
+    private Set<Permission> permissions = new HashSet<>();
 
     public String getRoleId() {
         return roleId;
@@ -39,5 +35,9 @@ public class Role {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName == null ? null : roleName.trim();
+    }
+
+    public Set<Permission> getPermissions() {
+        return permissions;
     }
 }

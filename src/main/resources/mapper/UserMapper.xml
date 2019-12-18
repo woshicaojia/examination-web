@@ -2,56 +2,57 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.examonlineweb.dao.UserMapper" >
   <resultMap id="BaseResultMap" type="com.example.examonlineweb.entity.User" >
-    <id column="sys_id" property="sysId" jdbcType="VARCHAR" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="sex" property="sex" jdbcType="VARCHAR" />
-    <result column="age" property="age" jdbcType="INTEGER" />
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="china_name" property="chinaName" jdbcType="VARCHAR" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="user_pass" property="userPass" jdbcType="VARCHAR" />
     <result column="user_role" property="userRole" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <collection property="roles" ofType="com.example.examonlineweb.entity.Role">
+      <id column="role_id" property="roleId" jdbcType="VARCHAR" />
+      <result column="name" property="name" jdbcType="VARCHAR" />
+      <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+      <collection property="permissions" ofType="com.example.examonlineweb.entity.Permission">
+        <id column="per_id" property="perId" jdbcType="VARCHAR" />
+        <result column="permission_name" property="permissionName" jdbcType="VARCHAR" />
+        <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+      </collection>
+    </collection>
   </resultMap>
   <sql id="Base_Column_List" >
-    sys_id, name, sex, age, user_name, user_pass, user_role, create_time
+    user_id, china_name, user_name, user_pass, user_role, create_time, role_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from user
-    where sys_id = #{sysId,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </select>
-  <select id="loadUserByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select
-    <include refid="Base_Column_List" />
-    from user
-    where user_name = #{userName,jdbcType=VARCHAR}
+  <select id="findUserByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select * from user u,role r,permission p where u.role_id = r.role_id and
+    p.role_id = r.role_id and u.user_name = #{username,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from user
-    where sys_id = #{sysId,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.example.examonlineweb.entity.User" >
-    insert into user (sys_id, name, sex, 
-      age, user_name, user_pass, 
-      user_role, create_time)
-    values (#{sysId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
-      #{age,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPass,jdbcType=VARCHAR}, 
-      #{userRole,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR})
+    insert into user (user_id, china_name, user_name, 
+      user_pass, user_role, create_time, 
+      role_id)
+    values (#{userId,jdbcType=VARCHAR}, #{chinaName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userPass,jdbcType=VARCHAR}, #{userRole,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{roleId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.examonlineweb.entity.User" >
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="sysId != null" >
-        sys_id,
+      <if test="userId != null" >
+        user_id,
       </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="sex != null" >
-        sex,
-      </if>
-      <if test="age != null" >
-        age,
+      <if test="chinaName != null" >
+        china_name,
       </if>
       <if test="userName != null" >
         user_name,
@@ -65,19 +66,16 @@
       <if test="createTime != null" >
         create_time,
       </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="sysId != null" >
-        #{sysId,jdbcType=VARCHAR},
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
-        #{sex,jdbcType=VARCHAR},
-      </if>
-      <if test="age != null" >
-        #{age,jdbcType=INTEGER},
+      <if test="chinaName != null" >
+        #{chinaName,jdbcType=VARCHAR},
       </if>
       <if test="userName != null" >
         #{userName,jdbcType=VARCHAR},
@@ -91,19 +89,16 @@
       <if test="createTime != null" >
         #{createTime,jdbcType=VARCHAR},
       </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.example.examonlineweb.entity.User" >
     update user
     <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
-        sex = #{sex,jdbcType=VARCHAR},
-      </if>
-      <if test="age != null" >
-        age = #{age,jdbcType=INTEGER},
+      <if test="chinaName != null" >
+        china_name = #{chinaName,jdbcType=VARCHAR},
       </if>
       <if test="userName != null" >
         user_name = #{userName,jdbcType=VARCHAR},
@@ -117,18 +112,20 @@
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=VARCHAR},
       </if>
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=VARCHAR},
+      </if>
     </set>
-    where sys_id = #{sysId,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.examonlineweb.entity.User" >
     update user
-    set name = #{name,jdbcType=VARCHAR},
-      sex = #{sex,jdbcType=VARCHAR},
-      age = #{age,jdbcType=INTEGER},
+    set china_name = #{chinaName,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},
       user_pass = #{userPass,jdbcType=VARCHAR},
       user_role = #{userRole,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=VARCHAR}
-    where sys_id = #{sysId,jdbcType=VARCHAR}
+      create_time = #{createTime,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </update>
 </mapper>
