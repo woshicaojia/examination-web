@@ -70,9 +70,9 @@ public class ShiroConfig {
         //可以写路由也可以写jsp页面的访问路径
         bean.setLoginUrl("/login");
         //设置登录成功跳转的页面
-        bean.setSuccessUrl("templates/index.html");
+        bean.setSuccessUrl("index.html");
         //设置未授权跳转的页面
-        bean.setUnauthorizedUrl("templates/unauthorized.html");
+        bean.setUnauthorizedUrl("unauthorized.html");
         //定义过滤器
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/login", "anon");

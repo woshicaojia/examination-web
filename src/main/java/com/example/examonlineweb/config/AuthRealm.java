@@ -44,8 +44,9 @@ public class AuthRealm extends AuthorizingRealm {
             Set<Role> roles = user.getRoles();
             //遍历集合
             for (Role role : roles) {
+                System.out.println(role.getRoleName());
                 //将每一个role的name装进collection集合
-                rolesCollection.add(role.getName());
+                rolesCollection.add(role.getRoleName());
                 //获取每一个Role的permission的set集合
                 Set<Permission> permissionSet = role.getPermissions();
                 //遍历集合
