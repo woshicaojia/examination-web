@@ -22,6 +22,12 @@
     from student
     where sys_id = #{sysId,jdbcType=VARCHAR}
   </select>
+  <select id="findByStudentId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from student
+    where student_id = #{studentId,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from student
     where sys_id = #{sysId,jdbcType=VARCHAR}

@@ -18,6 +18,8 @@ public class User {
 
     private String roleId;
 
+    private String identify;
+
     //role集合
     private Set<Role> roles = new HashSet<>();
 
@@ -79,5 +81,13 @@ public class User {
 
     public Set<Role> getRoles() {
         return roles;
+    }
+
+    public String getIdentify() {
+        return identify;
+    }
+
+    public void setIdentify(String identify) {
+        this.identify = identify;
     }
 }

@@ -1,11 +1,15 @@
 package com.example.examonlineweb.config;
 
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -37,12 +41,43 @@ public class ShiroConfig {
     @Bean("authRealm")
     @DependsOn("lifecycleBeanPostProcessor")//可选
     public AuthRealm authRealm(@Qualifier("hashedCredentialsMatcher") HashedCredentialsMatcher matcher) {
+        //自定义realm
         AuthRealm authRealm = new AuthRealm();
         authRealm.setAuthorizationCachingEnabled(false);
         authRealm.setCredentialsMatcher(matcher);
         return authRealm;
     }
 
+    /**
+     * shiro session会话过期时间设置
+     * @return
+     */
+    @Bean
+    public DefaultWebSessionManager getDefaultWebSessionManager(){
+        DefaultWebSessionManager defaultWebSessionManager = new DefaultWebSessionManager();
+        defaultWebSessionManager.setGlobalSessionTimeout(1000*60*30);//单位毫秒
+        defaultWebSessionManager.setSessionValidationSchedulerEnabled(true);
+        defaultWebSessionManager.setSessionIdCookieEnabled(true);
+        return defaultWebSessionManager;
+    }
+
+    @Bean
+    public SimpleCookie getSimpleCookie(){
+        SimpleCookie simpleCookie = new SimpleCookie("rememberMe");
+        simpleCookie.setHttpOnly(true);
+        //设置记住我时间
+        simpleCookie.setMaxAge(2*60);//单位是秒
+        return simpleCookie;
+    }
+
+    @Bean
+    public CookieRememberMeManager getCookieRememberMe(){
+        CookieRememberMeManager manager = new CookieRememberMeManager();
+        //用来设置加密的Key,参数类型byte[],字节数组长度要求16
+        manager.setCipherKey(Base64.decode("6ZmI6I2j5Y+R5aSn5ZOlAA=="));
+        manager.setCookie(getSimpleCookie());
+        return manager;
+    }
 
     /**
      * 定义安全管理器securityManager,注入自定义的realm
@@ -53,6 +88,8 @@ public class ShiroConfig {
     public SecurityManager securityManager(@Qualifier("authRealm") AuthRealm authRealm) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         manager.setRealm(authRealm);
+        manager.setSessionManager(getDefaultWebSessionManager());
+        manager.setRememberMeManager(getCookieRememberMe());
         return manager;
     }
 
@@ -69,18 +106,25 @@ public class ShiroConfig {
         //设置登录页面
         //可以写路由也可以写jsp页面的访问路径
         bean.setLoginUrl("/login");
-        //设置登录成功跳转的页面
-        bean.setSuccessUrl("index.html");
-        //设置未授权跳转的页面
-        bean.setUnauthorizedUrl("unauthorized.html");
+        //设置登录成功跳转的页面，也可以设置跳转的路由
+        //bean.setSuccessUrl("index.html");
+        //设置未授权跳转的页面，也可以设置跳转的路由
+        //bean.setUnauthorizedUrl("unauthorized.html");
         //定义过滤器
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/login", "anon");
-        filterChainDefinitionMap.put("/loginUser", "anon");
-        filterChainDefinitionMap.put("/index", "authc");
-        filterChainDefinitionMap.put("/admin", "roles[teacher]");
-        filterChainDefinitionMap.put("/edit", "perms[delete]");
+        filterChainDefinitionMap.put("/login", "anon");//标识可以匿名访问
+        filterChainDefinitionMap.put("/main", "anon");
+        filterChainDefinitionMap.put("/index", "authc");//需要认证
+        filterChainDefinitionMap.put("/exam/**", "roles[student]");
+        filterChainDefinitionMap.put("/student/**", "roles[teacher]");
+        filterChainDefinitionMap.put("/subject/**", "roles[teacher]");
         filterChainDefinitionMap.put("/druid/**", "anon");
+        filterChainDefinitionMap.put("/css/**", "anon");
+        filterChainDefinitionMap.put("/fonts/**", "anon");
+        filterChainDefinitionMap.put("/images/**", "anon");
+        filterChainDefinitionMap.put("/img/**", "anon");
+        filterChainDefinitionMap.put("/js/**", "anon");
+        filterChainDefinitionMap.put("/plugins/**", "anon");
         //需要登录访问的资源 , 一般将/**放在最下边
         filterChainDefinitionMap.put("/**", "authc");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
